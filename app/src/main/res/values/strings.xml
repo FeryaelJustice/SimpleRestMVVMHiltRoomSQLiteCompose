@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">SimpleRestMVVMHiltRoomSQLiteCompose</string>
+
+    <!-- Screens -->
+    <string name="main">main</string>
+    <string name="users">users</string>
+    <string name="login">login</string>
+    <string name="register">register</string>
+    <string name="app">app</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="user_list">user_list</string>
+    <string name="user_detail">user_detail</string>
+
+
+    <!-- Screens Array -->
+    <!-- <string-array name="screens">
+        <item name="">main</item>
+        <item name="users">users</item>
+        <item name="login">login</item>
+        <item name="user_list">user_list</item>
+        <item name="user_detail">user_detail</item>
+    </string-array> -->
+</resources>
