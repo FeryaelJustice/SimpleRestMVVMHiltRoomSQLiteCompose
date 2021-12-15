@@ -1,4 +1,4 @@
-package com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.user
+package com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.user
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,6 +31,7 @@ import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.viewmodel.Settings
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.viewmodel.UserViewModel
 import com.valentinilk.shimmer.shimmer
 
+@ExperimentalCoilApi
 @Composable
 fun Users(
     viewModel: UserViewModel = hiltViewModel(),

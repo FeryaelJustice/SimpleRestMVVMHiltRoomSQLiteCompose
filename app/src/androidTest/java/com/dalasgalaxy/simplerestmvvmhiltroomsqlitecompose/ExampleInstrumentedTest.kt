@@ -4,10 +4,15 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.App
-import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.MainActivity
-import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.user.MyApp
+import coil.annotation.ExperimentalCoilApi
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.model.user.User
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.navigation.Navigation
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.MainActivity
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.user.MyApp
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.viewmodel.SettingsViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 
 import org.junit.Test
@@ -24,11 +29,13 @@ class ExampleInstrumentedTest {
 
     @get:Rule(order = 2)
     var composeTestRule = createAndroidComposeRule<MainActivity>()
-    
+
     @Test
     fun addingItemsWorksCorrectly() {
-        composeTestRule.setContent { 
-            App()
+        composeTestRule.setContent {
+            val navController = rememberNavController()
+            val viewModel: SettingsViewModel = hiltViewModel()
+            Navigation(navController, viewModel)
         }
         composeTestRule.onNodeWithContentDescription("Add").performClick()
         composeTestRule.onNodeWithText("Name 0 LastName 0").assertExists()
@@ -40,7 +47,9 @@ class ExampleInstrumentedTest {
     @Test
     fun removingItemsWorksCorrectly() {
         composeTestRule.setContent {
-            App()
+            val navController = rememberNavController()
+            val viewModel: SettingsViewModel = hiltViewModel()
+            Navigation(navController, viewModel)
         }
         composeTestRule.onNodeWithContentDescription("Add").performClick()
         composeTestRule.onNodeWithText("Name 0 LastName 0").assertExists()
@@ -49,10 +58,14 @@ class ExampleInstrumentedTest {
         composeTestRule.onNodeWithText("Name 0 LastName 0").assertDoesNotExist()
     }
 
+    @ExperimentalCoilApi
     @Test
     fun loadingIsVisibleWhenAddingItems() {
         composeTestRule.setContent {
-            MyApp(users = emptyList(), isLoading = true)
+            val navController = rememberNavController()
+            MyApp(
+                users = emptyList(), isLoading = true, navController = navController
+            )
         }
         composeTestRule.onNodeWithContentDescription("Add").performClick()
         composeTestRule.onNodeWithText("loadingCard").assertExists()

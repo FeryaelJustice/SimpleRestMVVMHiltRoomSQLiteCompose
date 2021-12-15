@@ -15,11 +15,11 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import androidx.navigation.compose.navigation
-import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.main.ForgotPasswordScreen
-import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.main.LoginScreen
-import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.main.RegisterScreen
-import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.user.UserDetail
-import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.user.Users
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main.ForgotPasswordScreen
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main.LoginScreen
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main.RegisterScreen
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.user.UserDetail
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.user.Users
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.viewmodel.SettingsViewModel
 
 @Composable

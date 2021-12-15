@@ -1,4 +1,4 @@
-package com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.main
+package com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize

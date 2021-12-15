@@ -1,4 +1,4 @@
-package com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.view.main
+package com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,13 @@ import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.navigation.Screen
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.viewmodel.SettingsViewModel
 
 @Composable
-fun ForgotPasswordScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
+fun LoginScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
+    if (settingsViewModel.isLogged.value == true) {
+        navController.navigate(Screen.UsersScreen.route) {
+            popUpTo(navController.graph.startDestinationId)
+            launchSingleTop = true
+        }
+    }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -21,20 +27,20 @@ fun ForgotPasswordScreen(navController: NavController, settingsViewModel: Settin
     ) {
         items(1) {
             Button(onClick = {
-                navController.navigate(Screen.Login.route) {
-                    popUpTo(navController.graph.startDestinationId)
-                    launchSingleTop = true
-                }
-            }) {
-                Text(text = "Go to login screen")
-            }
-            Button(onClick = {
                 navController.navigate(Screen.Register.route) {
                     popUpTo(navController.graph.startDestinationId)
                     launchSingleTop = true
                 }
             }) {
                 Text(text = "Go to register screen")
+            }
+            Button(onClick = {
+                navController.navigate(Screen.ForgotPassword.route) {
+                    popUpTo(navController.graph.startDestinationId)
+                    launchSingleTop = true
+                }
+            }) {
+                Text(text = "Go to forgot password screen")
             }
             Button(onClick = {
                 navController.navigate(Screen.UsersScreen.route) {
