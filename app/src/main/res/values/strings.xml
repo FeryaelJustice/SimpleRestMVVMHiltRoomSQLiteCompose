@@ -2,6 +2,7 @@
     <string name="app_name">SimpleRestMVVMHiltRoomSQLiteCompose</string>
 
     <!-- Screens -->
+    <string name="splash">splash</string>
     <string name="main">main</string>
     <string name="users">users</string>
     <string name="login">login</string>

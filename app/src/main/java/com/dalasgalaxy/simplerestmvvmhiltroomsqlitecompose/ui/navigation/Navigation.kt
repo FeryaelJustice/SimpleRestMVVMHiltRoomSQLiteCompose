@@ -15,9 +15,11 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import androidx.navigation.compose.navigation
+import coil.annotation.ExperimentalCoilApi
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main.ForgotPasswordScreen
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main.LoginScreen
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main.RegisterScreen
+import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.main.SplashScreen
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.user.UserDetail
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.screen.user.Users
 import com.dalasgalaxy.simplerestmvvmhiltroomsqlitecompose.ui.viewmodel.SettingsViewModel
@@ -32,25 +34,8 @@ fun Navigation(navController: NavHostController, settingsViewModel: SettingsView
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    if ((currentDestination?.route == Screen.Login.route) || (currentDestination?.route == Screen.Register.route) || (currentDestination?.route == Screen.ForgotPassword.route)) {
-        Scaffold(topBar = {
-            TopAppBar(
-                title = { Text(text = "App by Fer") },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        settingsViewModel.setIsLogged(false)
-                        navController.navigate(Screen.Login.route) {
-                            popUpTo(navController.graph.startDestinationId)
-                            launchSingleTop = true
-                        }
-                    }) {
-                        Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
-                    }
-                },
-                elevation = 12.dp,
-                actions = {}
-            )
-        }) { innerPadding ->
+    if ((currentDestination?.route == Screen.Splash.route) || (currentDestination?.route == Screen.Login.route) || (currentDestination?.route == Screen.Register.route) || (currentDestination?.route == Screen.ForgotPassword.route)) {
+        Scaffold() { innerPadding ->
             NavHost(
                 navController = navController,
                 startDestination = main,
@@ -115,16 +100,23 @@ fun Navigation(navController: NavHostController, settingsViewModel: SettingsView
 }
 
 
+@ExperimentalCoilApi
 fun NavGraphBuilder.graph(navController: NavHostController, settingsViewModel: SettingsViewModel) {
-    navigation(startDestination = Screen.Login.route, route = main) {
+    navigation(startDestination = Screen.Splash.route, route = main) {
+        composable(route = Screen.Splash.route) {
+            SplashScreen(navController = navController, settingsViewModel = settingsViewModel)
+        }
         composable(route = Screen.Login.route) {
-            LoginScreen(navController = navController, settingsViewModel)
+            LoginScreen(navController = navController, settingsViewModel = settingsViewModel)
         }
         composable(route = Screen.Register.route) {
-            RegisterScreen(navController = navController, settingsViewModel)
+            RegisterScreen(navController = navController, settingsViewModel = settingsViewModel)
         }
         composable(route = Screen.ForgotPassword.route) {
-            ForgotPasswordScreen(navController = navController, settingsViewModel)
+            ForgotPasswordScreen(
+                navController = navController,
+                settingsViewModel = settingsViewModel
+            )
         }
     }
     navigation(startDestination = Screen.UsersScreen.route, route = users) {
@@ -132,7 +124,7 @@ fun NavGraphBuilder.graph(navController: NavHostController, settingsViewModel: S
             Users(navController = navController, settingsViewModel = settingsViewModel)
         }
         composable(route = Screen.UserDetailScreen.route) {
-            UserDetail(navController = navController, id = 0, settingsViewModel)
+            UserDetail(navController = navController, id = 0, settingsViewModel = settingsViewModel)
         }
         composable(
             route = Screen.UserDetailScreen.route + "/{id}", arguments = listOf(
